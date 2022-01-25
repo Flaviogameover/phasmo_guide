@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+body{
+    background-color: rgb(230, 230, 230);
+}
+
+header{
+    padding: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 1px 1px 6px 3px rgb(0 0 0 / 20%);
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+header svg{
+    font-size: 45px;
+    cursor: pointer;
+}
+
+header h2{
+    text-align: center;
+    align-self: center;
+}
+
+
+.app {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.evidences, 
+.ghost-title, 
+.options,
+.option-single,
+.ghost-profile{
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px 3px rgb(0 0 0 / 20%);
+    margin: 20px;
+    background-color: #fff;
+}
+
+.evidences-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 700px;
+    padding: 20px;
+    margin: 20px auto;
+
+}
+
+.title{
+    padding: 20px 0 5px 20px;
+    font-size: 18px;
+}
+
+.title-tip{
+    padding-left: 20px;
+    font-size: 13px;
+}
+
+.evidence-single {
+    background-color: #fff;
+    flex: 1 0 21%;
+    /* explanation below */
+    margin: 5px;
+    text-align: center;
+
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px 3px rgb(0 0 0 / 20%);
+
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.evidence-single:hover{
+    background-color: rgb(0,0,0,40%);
+}
+
+.evidence-single svg{
+    font-size: 30px;
+}
+
+.ghosts {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px 3px rgb(0 0 0 / 20%);
+    margin: 20px;
+    background-color: #fff;
+    position: relative;
+}
+
+.ghost-info p:nth-of-type(1){
+    cursor: pointer;
+}
+
+.remove-ghost{
+    position: absolute;
+    right: -15px;
+    top: -10px;
+    font-size: 15px;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 50%;
+    box-shadow: 1px 1px 6px 3px rgb(0 0 0 / 20%);
+    background-color: #ccc;
+}
+
+.ghosts p {
+    padding: 5px;
+}
+
+.ghost-power {
+    text-align: right;
+}
+
+.option-single{
+    font-size: 20px;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.option-single:hover{
+    background-color: rgb(0,0,0,10%);
+}
