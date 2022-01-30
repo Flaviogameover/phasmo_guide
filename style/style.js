@@ -11,11 +11,11 @@ export default StyleSheet.create({
         color: '#000',
         fontWeight: 'bold'
     },
-    red:{
-        color: '#f00',
+    red: {
+        color: '#e73535',
         fontWeight: 'bold'
     },
-    yellow:{
+    blue: {
         color: '#0ff',
         fontWeight: 'bold'
     },
@@ -26,55 +26,74 @@ export default StyleSheet.create({
         flex: 1,
     },
     header: {
-        height: 50,
+        height: 65,
         paddingHorizontal: 20,
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
         flexDirection: 'row',
         elevation: 5,
         alignItems: 'center',
+        justifyContent: 'space-between'
     },
-    appLight:{
-        backgroundColor: '#e0e0e0',
+    optionText:{
+        textAlign: 'center',
+        fontSize: 30,
+        fontWeight: 'bold'
+    },  
+    appLight: {
+        backgroundColor: '#C9E7FE',
+    },
+    headerLight:{
+        backgroundColor: '#A7D9FF',
+    },
+    bgLight: {
+        backgroundColor: '#fff',
+    },
+    optionLight: {
+        backgroundColor: '#B1D8F6',
+    },
+    colorLight: {
+        color: '#fff'
+    },
+    evidenceLight: {
+        backgroundColor: '#fff',
+    },
+    iconIdleLight: {
+        color: '#000'
+    },
+    titleLight: {
+        color: '#1D7EC7',
     },
     appDark: {
         backgroundColor: '#1F1F1F'
     },
-    bgLight:{
-        backgroundColor: '#fff',
-    },
-    bgDark:{
+    bgDark: {
         backgroundColor: '#121212',
     },
-    optionDark:{
+    optionDark: {
         backgroundColor: '#1F1F1F'
     },
-    optionLight:{
-        backgroundColor: '#fff',
+    colorDark: {
+        color: '#BB86F9',
     },
-    colorLight:{
-        color: '#000'
+    iconDark: {
+        color: '#BB86F9',
     },
-    colorDark:{
-        color: '#CDCDCD',
+    evidenceDark: {
+        backgroundColor: '#BB86F9',
     },
-    evidenceLight:{
-        backgroundColor: '#fff',
-
+    iconIdleDark: {
+        color: '#fff'
     },
-    evidenceDark:{
-        backgroundColor: '#fff',
-
+    titleDark: {
+        color: '#fff',
     },
     headerTitle: {
         fontSize: 22,
-        flex: 1,
-        textAlign: 'center',
-    },
-    svgParent: {
+        fontWeight: 'bold'
     },
     headerSvg: {
-        fontSize: 25,
+        fontSize: 35,
     },
     options: {
         paddingVertical: 20,
@@ -88,19 +107,19 @@ export default StyleSheet.create({
         elevation: 5,
         flexDirection: 'row',
     },
-    ghostEvidence:{
+    ghostEvidence: {
         flexDirection: 'column',
     },
-    ghostBox:{
+    ghostBox: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    ghostBoxRight:{
+    ghostBoxRight: {
         width: '65%',
         alignItems: 'flex-end'
     },
-    ghostBoxLeft:{
+    ghostBoxLeft: {
         width: '35%',
         alignItems: 'flex-start'
     },
@@ -108,26 +127,29 @@ export default StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         margin: 10,
-        elevation: 3,
+        elevation: 2,
     },
     optionSingleText: {
         fontSize: 25,
         textAlign: 'center',
+        fontWeight: 'bold',
     },
-    cardsWrapper:{
-        flex:1,
+    cardsWrapper: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 10,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: '#fff',
         borderRadius: 5,
         marginVertical: 10
     },
-    cardSingle:{
-        width: '50%'
+    cardSingle: {
+        width: '50%',
     },
+    ouijaSingle:{
+        width: '25%',
+    },  
     evidencesWrapper: {
         flexWrap: 'wrap',
         padding: 10,
@@ -148,7 +170,12 @@ export default StyleSheet.create({
     },
     titleTip: {
         fontSize: 13
-    }
+    },
+    textInfo:{
+        fontSize: 15,
+        lineHeight: 25, 
+        textAlign: 'justify',
+    },
 })
 
 //@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'),

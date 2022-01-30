@@ -1,23 +1,49 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { LogBox, Text, View, TouchableOpacity, Alert, BackHandler, useFocusEffect } from 'react-native';
+import { LogBox, View, Alert, BackHandler } from 'react-native';
 import style from './style/style';
-import MainPage from './pages/main_page';
+import Ghosts from './pages/ghosts';
 import Options from './pages/options';
 import GhostProfile from './pages/ghost_profile';
 import CursedObjects from './pages/cursed_objects';
 import Objects from './pages/objects';
-import Icon from "react-native-vector-icons/Ionicons";
 import { useFonts, Montserrat_400Regular } from '@expo-google-fonts/montserrat';
 import AppLoading from 'expo-app-loading';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import HeaderComponent from './pages/headerComponent';
 
 export default function App() {
+    LogBox.ignoreAllLogs(true);
     const [darkMode, setDarkMode] = useState(true);
     const [currentPage, setCurrentPage] = useState({ title: 'Opções', tag: 'options' });
+    
+    const components = [
+        {
+            page: 'main',
+            component: <Ghosts darkMode={darkMode} changePage={setCurrentPage} />
+        },
+        { 
+            page: 'options',
+            component: <Options darkMode={darkMode} changePage={setCurrentPage} />
+        },
+        { 
+            page: 'ghost',
+            component: <GhostProfile darkMode={darkMode} ghostType={currentPage.type} />
+        },
+        { 
+            page: 'cursed',
+            component: <CursedObjects darkMode={darkMode} changePage={setCurrentPage} />
+        },
+        { 
+            page: 'objects',
+            component: <Objects darkMode={darkMode} objectType={currentPage.page} />
+        }
+    ]
+
+
+
     let [fontsLoaded] = useFonts({ Montserrat_400Regular });
-    LogBox.ignoreAllLogs(true);
+    
 
     useEffect(() => {
         const load_data = async () => {
@@ -55,20 +81,6 @@ export default function App() {
         }
     };
 
-    const handleAlert = () => {
-        /*Alert.alert(
-            "Se fodeu irmão!",
-            "Infelizmente irei roubar todas as informações do seu banco cadastrado no seu aparelho :/ \n\n\nObs: Se fechar o app eu robo 2x!",
-            [
-                {
-                    text: "Aceitar",
-                    onPress: () => console.log("Cancel Pressed"),
-                },
-                { text: "Aceitar com vontade", onPress: () => console.log("OK Pressed") }
-            ]
-        );*/
-    };
-
     useEffect(() => {
         const trocarPagina = () => {
 
@@ -97,7 +109,11 @@ export default function App() {
                     { text: 'Sair', onPress: () => BackHandler.exitApp() },
                 ]);
             } else {
-                alert(currentPage.tag)
+                //alert(currentPage.tag)
+                setCurrentPage({
+                    title: 'Opções',
+                    tag: 'options'
+                })
             }
 
 
@@ -121,55 +137,16 @@ export default function App() {
     return (
         <View style={[style.app, (darkMode) ? style.appDark : style.appLight]}>
             <StatusBar hidden />
-            <View style={[style.header, (darkMode) ? style.bgDark : style.bgLight]}>
-                {
-                    currentPage.tag !== 'options' ?
-                        <TouchableOpacity style={style.svgParent} onPress={() => setCurrentPage(() => {
-                            if (currentPage.tag === 'ghost') {
-                                return { title: 'Fantasmas', tag: 'main' }
-                            }
-                            else if (currentPage.tag === 'objects') {
-                                return { title: 'Objetos Amaldiçoados', tag: 'cursed' }
-                            }
-                            else {
-                                return { title: 'Opções', tag: 'options' }
-                            }
-                        })}>
-                            <Icon style={[style.headerSvg, (darkMode) ? style.colorDark : style.colorLight]}
-                                name="arrow-back"
-                                color={(darkMode) ? '#cdcdcd' : '#000'}
-                                size={45}
-                            />
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity style={style.svgParent} onLongPress={() => handleAlert()} onPress={() => setDarkMode(!darkMode)}>
-                            <Icon style={style.headerSvg}
-                                name={(darkMode ? 'sunny' : 'moon')}
-                                color={(darkMode) ? '#cdcdcd' : '#000'}
-                                size={45}
-                            />
-                        </TouchableOpacity>
-                }
-
-                <Text style={[style.Family, style.headerTitle, (darkMode) ? style.colorDark : style.colorLight]}>{currentPage.title}</Text>
-            </View>
+            <HeaderComponent fontsLoaded={fontsLoaded} darkMode={darkMode} setDarkMode={setDarkMode} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
             {
-                currentPage.tag === 'main' ?
-                    <MainPage darkMode={darkMode} changePage={setCurrentPage} />
-                    :
-                    currentPage.tag === 'options' ?
-                        <Options darkMode={darkMode} changePage={setCurrentPage} />
-                        :
-                        currentPage.tag === 'ghost' ?
-                            <GhostProfile darkMode={darkMode} ghostType={currentPage.type} />
-                            :
-                            currentPage.tag === 'cursed' ?
-                                <CursedObjects darkMode={darkMode} changePage={setCurrentPage} />
-                                :
-                                currentPage.tag === 'objects' ?
-                                    <Objects darkMode={darkMode} objectType={currentPage.page} />
-                                    :
-                                    <></>
+               
+                components?.map((val)=>{
+                    if(currentPage.tag === val.page){
+                        return(
+                            val.component
+                        )
+                    }
+                })
             }
         </View>
     );

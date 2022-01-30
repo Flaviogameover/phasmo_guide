@@ -1,18 +1,21 @@
-import { useState, useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import GhostComponent from './ghostSingleComponent';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
+
+
+import { useState, useEffect } from 'react';
+import GhostComponent from './ghostSingleComponent';
+import { Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import style from '../style/style';
 
 
 
-const MainPage = (props) => {
+const Ghosts = (props) => {
     const [foundEvidences, setFoundEvidences] = useState([]);
+    const [possibleGhosts, setPossibleGhosts] = useState([]);
     const [evidences, setEvidences] = useState([
         {
             name: 'DOTS',
@@ -57,7 +60,6 @@ const MainPage = (props) => {
             type: MaterialCommunityIcons
         },
     ]);
-    const [possibleGhosts, setPossibleGhosts] = useState([]);
     const [ghosts, setGhosts] = useState([
         {
             name: 'Banshee',
@@ -91,14 +93,14 @@ const MainPage = (props) => {
             name: 'Jinn',
             evidence: ['EMF', 'TEMPERATURA', 'DIGITAIS'],
             strength: 'Anda mais rápido se a vítima estiver longe.',
-            weakness: 'Não usa sua habilidade se a caixa de força estiver desligada.',
+            weakness: 'Não desliga a caixa de força.',
             isActive: true
         },
         {
             name: 'Mare',
             evidence: ['ORBS', 'SPIRITBOX', 'ESCRITA'],
             strength: 'Tem chances maiores de atacar no escuro.',
-            weakness: 'Ligar a luzes irá diminuir as chances de um ataque.',
+            weakness: 'Não liga as luzes',
             isActive: true
         },
         {
@@ -133,7 +135,7 @@ const MainPage = (props) => {
             name: 'Phantom',
             evidence: ['SPIRITBOX', 'DIGITAIS', 'DOTS'],
             strength: 'Olhar para ele, drenará mais sanidade.',
-            weakness: 'Desaparece quando fotografado.',
+            weakness: 'Se tirar uma foto dele ele some.',
             isActive: true
         },
         {
@@ -188,8 +190,8 @@ const MainPage = (props) => {
         {
             name: 'Wraith',
             evidence: ['EMF', 'SPIRITBOX', 'DOTS'],
-            strength: 'Não deixa pegadas ao pisar no sal.',
-            weakness: 'Sal aumenta atividade.',
+            strength: 'Sal aumenta a atividade',
+            weakness: 'Não deixa pegadas ao pisar no sal.',
             isActive: true
         },
         {
@@ -238,16 +240,6 @@ const MainPage = (props) => {
 
         }
     };
-
-    //chamar pelo primeiro nome apenas faz aumentar a atividade e possiveis interações
-    //criar objetos amaldiçoados e dar dicas de cada V2.0
-    //criar items e dar dicas de cada um v2.0
-    //criar perfil para cada fantasma e dar dicas contra ele
-    //add match de evidencias e remover os que nao baterem - X
-    //refatorar pontos fortes/fracos
-    // name,strength,weakness - X
-    // substituir os nomes pelos icones - X
-    // tocar e segurar remove a evidencia das possibilidades - X
 
     const handleFoundEvidence = (par) => {
         par.isActive++;
@@ -344,25 +336,50 @@ const MainPage = (props) => {
     }, [foundEvidences]);
 
     const handleReset = () => {
-        setPossibleGhosts([]);
-        setFoundEvidences([]);
-        let new_arr = ghosts.map(item => {
-            item.isActive = true;
-            return item;
-        })
-        let new_arr2 = evidences.map(item => {
-            item.isActive = 0;
-            return item;
-        })
-        setEvidences(new_arr2);
-        setGhosts(new_arr);
+
+
+        Alert.alert(
+            "Resetar",
+            "Deseja resetar as evidências ?",
+            [
+                {
+                    text: "Cancelar",
+                    onPress: () => null,
+                },
+                {
+                    text: "Resetar", onPress: () => {
+                        setPossibleGhosts([]);
+                        setFoundEvidences([]);
+                        let new_arr = ghosts.map(item => {
+                            item.isActive = true;
+                            return item;
+                        })
+                        let new_arr2 = evidences.map(item => {
+                            item.isActive = 0;
+                            return item;
+                        })
+                        setEvidences(new_arr2);
+                        setGhosts(new_arr);
+                    }
+                }
+            ]
+        );
     };
 
     return (
         <ScrollView style={style.app}>
 
             <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
-                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.colorDark : style.colorLight]}>Evidências</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 5 }}>
+                    <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Evidências</Text>
+                    <TouchableOpacity onPress={() => handleReset()}>
+                        <Ionicons
+                            name='trash'
+                            style={style.red}
+                            size={35}
+                        />
+                    </TouchableOpacity>
+                </View>
                 <Text style={[style.titleTip, (props.darkMode) ? style.colorDark : style.colorLight]}>Toque na evidência para filtrar os possíveis fantasmas</Text>
                 <View style={style.evidencesWrapper}>
                     {
@@ -370,7 +387,7 @@ const MainPage = (props) => {
                             return (
                                 <TouchableOpacity
                                     onPress={() => handleFoundEvidence(val)}
-                                    style={[ (props.darkMode) ? style.evidenceDark : style.evidenceLight, style.evidenceSingle,
+                                    style={[(props.darkMode) ? style.appDark : style.evidenceLight, style.evidenceSingle,
                                     val.isActive === 1 ?
                                         { backgroundColor: '#11dd88' } :
                                         val.isActive === 2 ?
@@ -381,25 +398,28 @@ const MainPage = (props) => {
                                     key={index}>
                                     <val.type
                                         name={val.icon}
-                                        color={val.isActive !== 0 ? '#fff' : '#000'}
+                                        style={val.isActive !== 0 ? style.iconIdleDark : (props.darkMode) ? style.iconDark
+                                            : style.iconIdleLight}
                                         size={45}
                                     />
-                                    <Text style={[style.evidenceSingeText, { color: val.isActive !== 0 ? '#fff' : '#000' }]}>{val.name}</Text>
+                                    <Text
+                                        style={
+                                            [style.evidenceSingeText,
+                                            (val.isActive) === 0 ?
+                                                (props.darkMode) ? style.titleDark
+                                                    : style.colorLight
+                                                : style.titleDark
+                                            ]
+                                        }>{val.name}</Text>
                                 </TouchableOpacity>
                             )
                         })
                     }
                 </View>
             </View>
-            
-            <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
-                <TouchableOpacity onPress={() => handleReset()}>
-                    <Text style={[{ textAlign: 'center', padding: 13, fontSize: 20 }, (props.darkMode) ?  [style.evidenceDark, { color: '#000' }] : { backgroundColor: '#e73535', color: '#fff' }]}>Resetar</Text>
-                </TouchableOpacity>
-            </View>
 
             <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
-                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.colorDark : style.colorLight]}>Fantasmas</Text>
+                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Fantasmas</Text>
                 <Text style={[style.titleTip, (props.darkMode) ? style.colorDark : style.colorLight]}>Toque no fantasma para ver dicas contra ele</Text>
                 <Text style={[style.titleTip, (props.darkMode) ? style.colorDark : style.colorLight]}>Toque e segure no fantasma para desconsiderá-lo</Text>
                 {
@@ -442,7 +462,7 @@ const MainPage = (props) => {
                             })
                             :
                             <View style={[style.options, (props.darkMode) ? style.optionDark : style.optionLight]}>
-                                <Text style={[{ textAlign: 'center' }, (props.darkMode) ? style.colorDark : style.colorLight]}>Nenhum fantasma correspondente!</Text>
+                                <Text style={[{ textAlign: 'center' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Nenhum fantasma correspondente!</Text>
                             </View>
                 }
             </View>
@@ -452,4 +472,4 @@ const MainPage = (props) => {
 
 
 
-export default MainPage;
+export default Ghosts;

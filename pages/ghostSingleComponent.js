@@ -14,7 +14,7 @@ const GhostComponent = (props) => {
                     !props.ghost.isActive ?
                         style.white
                         :
-                        (props.darkMode) ? style.colorDark : style.colorLight
+                        (props.darkMode) ? style.titleDark : style.colorLight
                     ]}>
                     {props.ghost.name}
                 </Text>
@@ -45,7 +45,7 @@ const GhostComponent = (props) => {
                     <Text style={[!props.ghost.isActive ?
                         style.white
                         :
-                        style.yellow
+                        style.blue
                         , { textAlign: 'right' }
                     ]}>{props.ghost.weakness}</Text>
                 </View>

@@ -1,7 +1,6 @@
-import Data from './data';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { Data } from './data';
+import { View, Text, ScrollView } from 'react-native';
 import style from '../style/style';
-
 
 const GhostProfile = (props) => {
 
@@ -14,31 +13,35 @@ const GhostProfile = (props) => {
                     ghostInfo ?
                         <View >
                             <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
-                                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.colorDark : style.colorLight]}>{ghostInfo.name}</Text>
-                                <Text style={[{ fontSize: 20, textAlign: 'center', padding: 25 }, (props.darkMode) ? style.colorDark : style.colorLight]}>{ghostInfo.evidence.join(', ')}</Text>
+                                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>{ghostInfo.name}</Text>
+                                <Text style={[{ fontSize: 20, textAlign: 'center', padding: 25 }, (props.darkMode) ? style.titleDark : style.colorLight]}>{ghostInfo.evidence.join(', ')}</Text>
                                 <View style={{ paddingTop: 5 }}>
-                                    <Text style={[{ fontSize: 15, lineHeight: 25 }, (props.darkMode) ? style.colorDark : style.colorLight]}>{ghostInfo.info}</Text>
+                                    <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>{ghostInfo.info}</Text>
                                 </View>
                             </View>
                             <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
-                                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.colorDark : style.colorLight]}>Características</Text>
+                                    <Text style={[{ fontSize: 20, textAlign: 'center', padding: 5 }, (props.darkMode) ? style.titleDark : style.colorLight]}>{ghostInfo.strength}</Text>
+                                    <Text style={[{ fontSize: 20, textAlign: 'center', padding: 5 }, (props.darkMode) ? style.titleDark : style.colorLight]}>{ghostInfo.weakness}</Text>
+                            </View>
+                            <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
+                                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Características</Text>
                                 {
                                     ghostInfo.traits?.map((val, index) => {
                                         return (
                                             <View key={index} style={{ padding: 20 }}>
-                                                <Text style={[{ fontSize: 15 }, (props.darkMode) ? style.colorDark : style.colorLight]}>► {val}</Text>
+                                                <Text style={[style.textInfo, (props.darkMode) ? style.titleDark : style.titleLight]}>► <Text style={[{ fontSize: 15 }, (props.darkMode) ? style.colorDark : style.colorLight]}>{val}</Text></Text>
                                             </View>
                                         )
                                     })
                                 }
                             </View>
                             <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
-                                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.colorDark : style.colorLight]}>Estratégias</Text>
+                                <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Estratégias</Text>
                                 {
                                     ghostInfo.strategies?.map((val, index) => {
                                         return (
                                             <View key={index} style={{ padding: 20 }}>
-                                                <Text style={[{ fontSize: 15 }, (props.darkMode) ? style.colorDark : style.colorLight]}>► {val}</Text>
+                                                <Text  style={[style.textInfo, (props.darkMode) ? style.titleDark : style.titleLight]}>► <Text style={[{ fontSize: 15 }, (props.darkMode) ? style.colorDark : style.colorLight]}>{val}</Text></Text>
                                             </View>
                                         )
                                     })
