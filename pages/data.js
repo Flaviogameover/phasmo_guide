@@ -402,7 +402,8 @@ const yurei = {
 const cards = {
     name: 'Cartas Tarô',
     uses: 10,
-    info: 'As cartas de tarô se referem à um deck com 10 cartas aleatórias, podendo conter cartas repetidas. Cada uma possui um efeito diferente, podendo ser retiradas apenas dentro do local à ser investigado. JAMAIS utilize as cartas durante uma caçada, pois ela terá o seu efeito anulado e irá sumir do deck. Tire uma foto das cartas antes de utiliza-las, pois o deck irá sumir após todas as 10 terem sido retiradas.',
+    info: 'As cartas de tarô se referem à um deck com 10 cartas aleatórias que podem ser utilizadas para ajudar (ou não) o jogador durante a investigação, podendo conter cartas repetidas. Cada uma possui um efeito diferente, podendo ser retiradas apenas dentro do local à ser investigado. JAMAIS utilize as cartas durante uma caçada, pois ela terá o seu efeito anulado e irá sumir do deck. Tire uma foto das cartas antes de utiliza-las, pois o deck irá sumir após todas as 10 terem sido retiradas.',
+    howTo: 'Todas as cartas e seus efeitos que podem ser retiradas do deck.',
     effects: [
         {
             name: 'The Sun',
@@ -450,6 +451,7 @@ const cards = {
 const ouija = {
     name: 'Tabuleiro Ouija',
     uses: 'Reutilizável',
+    info: 'O Tabuleiro Ouija é um objeto amaldiçoado utilizado para obter informações em troca de sanidade. Nele podem ser feitas perguntas que podem (ou não) lhe ajudar durante a investigação. Para cada pergunta feita, uma porcentagem de sua sanidade irá ser trocada pela resposta do fantasma. Caso a sanidade do jogador que fará as perguntas cheguem a 0%, o Tabuleiro irá ser destruído e uma caçada amaldiçoada se iniciará!',
     info_sanity: 'Abaixo você poderá ver quais os tipos de perguntas que podem ser feitas e o seu custo de sanidade.',
     effect_sanity: [
         {
@@ -473,7 +475,7 @@ const ouija = {
             suc_demon: '4%'
         }
     ],
-    info: 'O Tabuleiro Ouija é um objeto amaldiçoado utilizado para se comunicar com o fantasma. Nele podem ser feitas perguntas que podem (ou não) lhe ajudar durante a investigação. Para cada pergunta feita, uma porcentagem de sua sanidade irá ser trocada pela resposta do fantasma. Caso a sanidade do jogador que fará as perguntas cheguem a 0%, o Tabuleiro irá ser destruído e uma caçada amaldiçoada se iniciará!',
+    howTo: 'Aqui estão algumas categorias de perguntas que podem ser feitas.',
     effects: [
         {
             name: 'Sobre sua atual localização.',
@@ -517,18 +519,55 @@ const ouija = {
 const music_box = {
     name: 'Caixa de Música',
     uses: 1,
-    info: 'A Caixa de Música, quando tocada, irá emitir uma melodia que fará com que o fantasma cante junto e revele sua localização, entretanto ele permanecerá invisível. Quando próximo ao fantasma, irá fazer com que ele se manifeste e vá em direção da Caixa de Música, caso o fantasma consiga encostar ou andar por pelo menos 5 segundos após se manifestar, uma caçada amaldiçoadas se iniciará. Ao tocar, a Caixa de Música não pode e nem deve ser interrompida, caso o jogador deixer a caixa cair no chão se estiver segurando, irá parar a melodia e uma caçada amaldiçoada irá se iniciar. A Caixa de Música pode ser colocada no chão e ser tocada.',
-    effect: 'Ao tocar a Caixa de Música, todos os jogadores próximos à melodia irão perder sanidade constantemente até que a música acabe. Tocar a Caixa de Música no chão, distante da sala do fantasma e se afastar, talvez seja a melhor opção para usar este objeto.'
+    info: 'A Caixa de Música é utilizada para encontrar a localização do fantasma, quando tocada, irá emitir uma melodia que fará com que o fantasma cante junto e revele sua localização, entretanto ele permanecerá invisível. Quando próximo ao fantasma, irá fazer com que ele se manifeste e vá em direção da Caixa de Música, caso o fantasma consiga encostar ou andar por pelo menos 5 segundos após se manifestar, uma caçada amaldiçoadas se iniciará. Ao tocar, a Caixa de Música não pode e nem deve ser interrompida, caso o jogador deixer a caixa cair no chão se estiver segurando, irá parar a melodia e uma caçada amaldiçoada irá se iniciar. A Caixa de Música pode ser colocada no chão e ser tocada.',
+    howTo: 'Ao tocar a Caixa de Música, todos os jogadores próximos à melodia irão perder sanidade constantemente até que a música acabe. Tocar a Caixa de Música no chão, distante da sala do fantasma e se afastar, talvez seja a melhor opção para usar este objeto.',
+    effect: ''
 
 };
 
+const doll = {
+    name: 'Boneco Voodoo',
+    uses: 10,
+    info: 'O Boneco Voodoo se refere à um boneco feito de pano que serve para forçar interações do fantasma em seu local. Ao interagir com o Boneco Voodoo, um dos 10 alfinetes irá furar o boneco aleatoriamente, causando interações no local do fantasma. Caso um dos pinos atinja o coração do boneco, uma caçada amaldiçoada irá se iniciar.',
+    info_sanity: 'Abaixo você poderá o custo de sanidade para os pinos',
+    effect_sanity: [
+        {
+            info: 'Demais pinos',
+            success: '10%',
+            suc_demon: '8%'
+        },
+        {
+            info: 'Pino no coração',
+            success: '20%',
+            suc_demon: '20%'
+        }
+    ],
+    howTo: 'Para utilizar o Boneco Voodoo, não deixe com que sua sanidade caia para menos de 15%. Caso utilize o boneco nessa situação, todos os pinos restantes irão perfurar o boneco e uma caçada amaldiçoada irá se iniciar.',
+    effect: 'Durante uma caçada, não ande com o boneco em mãos, há um bug onde o fantasma pode matar o jogador que estiver segurando o boneco.',
+};
+
+const mirror = {
+    name: 'Espelho Assombrado',
+    uses: 'Reutilizável',
+    info: 'O Espelho Assombrado é utilizado para descobrir a localização do fantasma, podendo ser utilizado várias vezes com o custo de 8% de sanidade por segundo. Após a sanidade do jogador que estiver com o espelho chegar abaixo deste valor, o espelho irá se quebrar e uma caçada amaldiçoada iniciará.',
+    howTo: 'Quando utilizado, o Espelho Assombrado irá mostrar o local atual do fantasma, facilitando totalmente a investigação. O espelho ficará girando dentro do local, permitindo que o jogador veja por completo o local. Nas dificuldades mais altas, os fantasmas costumam se mover para outros locais, sabendo disso, evitar que o espelho se quebre evitará ter que encontrar o fantasma novamente.',
+    effect: '',
+};
+
+const circle = {
+    name: 'Círculo de Invocação',
+    uses: 1,
+    info: 'O Círculo de Invocação é utilizado para prender o fantasma por alguns segundos e tirar uma foto dele. Dentre os objetos amaldiçoados, este é o mais perigoso por iniciar uma caçada amaldiçoada após o uso sem condições adicionais.',
+    howTo: 'Cada vela acesa no Círculo de Invocação, irá drenar por volta de 16% de sanidade, causando uma perca total de 80% de sanidade.',
+    effect: 'Após as 5 velas acesas, o fantasma irá se manifestar e ficar preso por poucos segundos (entre 1 à 3 segundos), logo em seguida irá sair do Círculo de Invocação e iniciar uma caçada amaldiçoada. Não utilize o Círculo de Invocação durante uma caçada normal, isso fará com que o fantasma se teleporte para dentro do círculo sem ficar preso e estenderá sua caçada por mais 20 segundos.',
+};
 
 export const Data = (par) => {
 
     switch (par) {
         case 'banshee':
             return banshee;
-        case 'demonio':
+        case 'demônio':
             return demonio;
         case 'goryo':
             return goryo;
@@ -554,7 +593,7 @@ export const Data = (par) => {
             return raiju;
         case 'revenant':
             return revenant;
-        case shade:
+        case 'shade':
             return shade;
         case 'spirit':
             return spirit;
@@ -576,6 +615,12 @@ export const Data = (par) => {
             return ouija;
         case 'music_box':
             return music_box;
+        case 'doll':
+            return doll;
+        case 'mirror':
+            return mirror;
+        case 'circle':
+            return circle;
         default:
             return null;
     }

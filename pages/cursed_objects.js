@@ -8,11 +8,11 @@ const CursedObjects = (props) => {
 
     const objects = [
         {
-            title: 'Cartas',
+            title: 'Cartas de Tarô',
             page: 'cards'
         },
         {
-            title: 'Ouija',
+            title: 'Tabuleiro Ouija',
             page: 'ouija'
         },
         {
@@ -20,8 +20,16 @@ const CursedObjects = (props) => {
             page: 'music_box'
         },
         {
-            title: 'Em Breve',
-            page: 'soon'
+            title: 'Boneco Voodoo',
+            page: 'doll'
+        },
+        {
+            title: 'Espelho Assombrado',
+            page: 'mirror'
+        },
+        {
+            title: 'Círculo de Invocação',
+            page: 'circle'
         }
     ];
 
@@ -30,7 +38,7 @@ const CursedObjects = (props) => {
             <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
                 <Text style={[{ textAlign: 'center', fontSize: 30 }, (props.darkMode) ? style.titleDark : style.colorLight]}>Objetos Amaldiçoados</Text>
                 <View style={{ paddingTop: 15, alignItems: 'center' }}>
-                    <Text style={[{ fontSize: 15, lineHeight: 25, textAlign: 'justify' }, (props.darkMode) ? style.colorDark : style.colorLight]}>Existem ao todo 6 objetos amaldiçoados, onde apenas 1 irá aparecer aleatóriamente na missão. Cada objeto (com exceção das cartas) irá reduzir bastante sua sanidade e, caso chegue a 0%, o objeto se destrói e uma caçada amaldiçoada se iniciará.</Text>
+                    <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>Existem ao todo 6 objetos amaldiçoados, onde apenas 1 irá aparecer aleatóriamente na missão. Cada objeto (com exceção das cartas) irá reduzir bastante sua sanidade e, caso chegue a 0%, o objeto se destrói e uma caçada amaldiçoada se iniciará.</Text>
                 </View>
                 <View style={{ paddingTop: 25 }}>
                     {

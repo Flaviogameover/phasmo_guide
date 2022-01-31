@@ -13,10 +13,6 @@ const Options = (props) => {
             title: 'Objetos Amaldiçoados',
             tag: 'cursed'
         },
-        {
-            title: 'Em Breve',
-            tag: 'money'
-        },
         /*{
             title: 'Em Breve',
             tag: 'hide'

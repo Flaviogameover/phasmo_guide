@@ -7,8 +7,6 @@ const Objects = (props) => {
 
     const objs = Data(props.objectType);
 
-
-
     return (
         <ScrollView>
             <View>
@@ -33,55 +31,87 @@ const Objects = (props) => {
                             </View>
 
                             { // OUIJA --------------------------------------------------------------------------------------------
-                                props.objectType === 'ouija' &&
-                                <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
-                                    <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Troca de sanidade</Text>
-                                    <View style={{ paddingTop: 5 }}>
-                                        <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>{objs.info_sanity}</Text>
+                                props.objectType === 'ouija' ?
+                                    <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
+                                        <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Troca de sanidade</Text>
+                                        <View style={{ paddingTop: 5 }}>
+                                            <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>{objs.info_sanity}</Text>
+                                        </View>
+                                        <View style={style.cardsWrapper}>
+                                            <View style={{ width: '50%' }}>
+                                                <Text style={[style.blue, { textAlign: 'justify' }]}>Tipos de perguntas</Text>
+                                            </View>
+                                            <View style={style.ouijaSingle}>
+                                                <Text style={[style.red, { textAlign: 'center' }]}>Sucedidas</Text>
+                                            </View>
+                                            <View style={style.ouijaSingle}>
+                                                <Text style={[style.red, { textAlign: 'center' }]}>Sucedidas (Demonio)</Text>
+                                            </View>
+                                        </View>
+                                        {
+                                            objs.effect_sanity?.map((val, index) => {
+                                                return (
+                                                    <View key={index} style={style.cardsWrapper}>
+                                                        <View style={{ width: '50%' }}>
+                                                            <Text style={[style.blue, { textAlign: 'justify' }]}>{val.info}</Text>
+                                                        </View>
+                                                        <View style={style.ouijaSingle}>
+                                                            <Text style={[style.red, { textAlign: 'center' }]}>{val.success}</Text>
+                                                        </View>
+                                                        <View style={style.ouijaSingle}>
+                                                            <Text style={[style.red, { textAlign: 'center' }]}>{val.suc_demon}</Text>
+                                                        </View>
+                                                    </View>
+                                                )
+                                            })
+                                        }
                                     </View>
-                                    <View style={style.cardsWrapper}>
-                                        <View style={{ width: '50%' }}>
-                                            <Text style={[style.blue, { textAlign: 'justify' }]}>Tipos de perguntas</Text>
-                                        </View>
-                                        <View style={style.ouijaSingle}>
-                                            <Text style={[style.red, { textAlign: 'center' }]}>Sucedidas</Text>
-                                        </View>
-                                        <View style={style.ouijaSingle}>
-                                            <Text style={[style.red, { textAlign: 'center' }]}>Sucedidas (Demonio)</Text>
-                                        </View>
-                                    </View>
-                                    {
-                                        objs.effect_sanity?.map((val, index) => {
-                                            return (
-                                                <View key={index} style={style.cardsWrapper}>
-                                                    <View style={{ width: '50%' }}>
-                                                        <Text style={[style.blue, { textAlign: 'justify' }]}>{val.info}</Text>
-                                                    </View>
-                                                    <View style={style.ouijaSingle}>
-                                                        <Text style={[style.red, { textAlign: 'center' }]}>{val.success}</Text>
-                                                    </View>
-                                                    <View style={style.ouijaSingle}>
-                                                        <Text style={[style.red, { textAlign: 'center' }]}>{val.suc_demon}</Text>
-                                                    </View>
+                                    // FIM OUIJA ----------------------------------------------------------------------------------------
+                                    :
+                                    props.objectType === 'doll' ?
+                                        <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
+                                            <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Troca de sanidade</Text>
+                                            <View style={{ paddingTop: 5 }}>
+                                                <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>{objs.info_sanity}</Text>
+                                            </View>
+                                            <View style={style.cardsWrapper}>
+                                                <View style={{ width: '50%' }}>
+                                                    <Text style={[style.blue, { textAlign: 'justify' }]}>Locais</Text>
                                                 </View>
-                                            )
-                                        })
-                                    }
-                                </View>
-                                // FIM OUIJA ----------------------------------------------------------------------------------------
+                                                <View style={style.ouijaSingle}>
+                                                    <Text style={[style.red, { textAlign: 'center' }]}>Sucedidas</Text>
+                                                </View>
+                                                <View style={style.ouijaSingle}>
+                                                    <Text style={[style.red, { textAlign: 'center' }]}>Sucedidas (Demonio)</Text>
+                                                </View>
+                                            </View>
+                                            {
+                                                objs.effect_sanity?.map((val, index) => {
+                                                    return (
+                                                        <View key={index} style={style.cardsWrapper}>
+                                                            <View style={{ width: '50%' }}>
+                                                                <Text style={[style.blue, { textAlign: 'justify' }]}>{val.info}</Text>
+                                                            </View>
+                                                            <View style={style.ouijaSingle}>
+                                                                <Text style={[style.red, { textAlign: 'center' }]}>{val.success}</Text>
+                                                            </View>
+                                                            <View style={style.ouijaSingle}>
+                                                                <Text style={[style.red, { textAlign: 'center' }]}>{val.suc_demon}</Text>
+                                                            </View>
+                                                        </View>
+                                                    )
+                                                })
+                                            }
+                                        </View>
+                                        :
+                                        <></>
                             }
 
                             <View style={[style.options, (props.darkMode) ? style.bgDark : style.bgLight]}>
                                 <Text style={[style.optionSingleText, { textAlign: 'left' }, (props.darkMode) ? style.titleDark : style.colorLight]}>Efeitos do objeto</Text>
-                                {
-                                    props.objectType === 'cards' ?
-                                        <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>Todas as cartas e seus efeitos que podem ser retiradas do deck.</Text>
-                                        :
-                                        props.objectType === 'ouija' ?
-                                            <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>Aqui estão algumas categorias de perguntas que podem ser feitas.</Text>
-                                            :
-                                            <></>
-                                }
+                                <View style={{ paddingTop: 5 }}>
+                                    <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>{objs.howTo}</Text>
+                                </View>
                                 <View>
                                     {
                                         props.objectType === 'cards' ?
@@ -98,7 +128,7 @@ const Objects = (props) => {
                                                 )
                                             })
                                             :
-                                            props.objectType === 'cards' ?
+                                            props.objectType === 'ouija' ?
                                                 objs.effects?.map((val, index) => {
                                                     return (
                                                         <View key={index} style={style.cardsWrapper}>
@@ -106,14 +136,11 @@ const Objects = (props) => {
                                                         </View>
                                                     )
                                                 })
-
                                                 :
-                                                props.objectType === 'music_box' ?
-                                                    <View style={{ paddingTop: 5 }}>
-                                                        <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>{objs.effect}</Text>
-                                                    </View>
-                                                    :
-                                                    <></>
+                                                <View>
+                                                    <Text style={[style.textInfo, (props.darkMode) ? style.colorDark : style.colorLight]}>{objs.effect}</Text>
+                                                </View>
+
                                     }
                                 </View>
                             </View>

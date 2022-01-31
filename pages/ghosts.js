@@ -69,7 +69,7 @@ const Ghosts = (props) => {
             isActive: true
         },
         {
-            name: 'Demonio',
+            name: 'Demônio',
             evidence: ['TEMPERATURA', 'DIGITAIS', 'ESCRITA'],
             strength: 'Iniciará caçadas com mais frequência.',
             weakness: 'Perderá menos sanidade usando objetos amaldiçoados.',
@@ -227,7 +227,6 @@ const Ghosts = (props) => {
     const _getData = async () => {
         try {
             let dataJson = await AsyncStorage.getItem('infos');
-
             if (dataJson !== null) {
                 dataJson = JSON.parse(dataJson);
 
@@ -289,6 +288,7 @@ const Ghosts = (props) => {
             setGhosts(new_arr);
         }
     };
+
 
     useEffect(async () => {
         let data = await _getData();
@@ -360,6 +360,9 @@ const Ghosts = (props) => {
                         })
                         setEvidences(new_arr2);
                         setGhosts(new_arr);
+                        (async()=>{
+                           await AsyncStorage.multiRemove(['infos','darkmode'])
+                        })();
                     }
                 }
             ]

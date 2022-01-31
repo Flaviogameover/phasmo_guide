@@ -5,7 +5,6 @@ import style from '../style/style';
 const GhostProfile = (props) => {
 
     const ghostInfo = Data(props.ghostType);
-
     return (
         <ScrollView>
             <View>

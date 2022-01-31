@@ -16,34 +16,43 @@ export default function App() {
     LogBox.ignoreAllLogs(true);
     const [darkMode, setDarkMode] = useState(true);
     const [currentPage, setCurrentPage] = useState({ title: 'Opções', tag: 'options' });
-    
-    const components = [
-        {
-            page: 'main',
-            component: <Ghosts darkMode={darkMode} changePage={setCurrentPage} />
-        },
-        { 
-            page: 'options',
-            component: <Options darkMode={darkMode} changePage={setCurrentPage} />
-        },
-        { 
-            page: 'ghost',
-            component: <GhostProfile darkMode={darkMode} ghostType={currentPage.type} />
-        },
-        { 
-            page: 'cursed',
-            component: <CursedObjects darkMode={darkMode} changePage={setCurrentPage} />
-        },
-        { 
-            page: 'objects',
-            component: <Objects darkMode={darkMode} objectType={currentPage.page} />
+
+    const components = (page) => {
+        let pages = [
+            {
+                page: 'main',
+                component: <Ghosts darkMode={darkMode} changePage={setCurrentPage} />
+            },
+            {
+                page: 'options',
+                component: <Options darkMode={darkMode} changePage={setCurrentPage} />
+            },
+            {
+                page: 'ghost',
+                component: <GhostProfile darkMode={darkMode} ghostType={currentPage.type} />
+            },
+            {
+                page: 'cursed',
+                component: <CursedObjects darkMode={darkMode} changePage={setCurrentPage} />
+            },
+            {
+                page: 'objects',
+                component: <Objects darkMode={darkMode} objectType={currentPage.page} />
+            }
+        ]
+
+        let result = pages.filter((val) => val.page === page)[0];
+        if (result === undefined) {
+            return pages[0].component;
+        } else {
+            return result;
         }
-    ]
+    }
 
 
 
     let [fontsLoaded] = useFonts({ Montserrat_400Regular });
-    
+
 
     useEffect(() => {
         const load_data = async () => {
@@ -137,16 +146,10 @@ export default function App() {
     return (
         <View style={[style.app, (darkMode) ? style.appDark : style.appLight]}>
             <StatusBar hidden />
-            <HeaderComponent fontsLoaded={fontsLoaded} darkMode={darkMode} setDarkMode={setDarkMode} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <HeaderComponent fontsLoaded={fontsLoaded} darkMode={darkMode} setDarkMode={setDarkMode} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             {
-               
-                components?.map((val)=>{
-                    if(currentPage.tag === val.page){
-                        return(
-                            val.component
-                        )
-                    }
-                })
+
+                components(currentPage.tag).component
             }
         </View>
     );
